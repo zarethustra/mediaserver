@@ -1,0 +1,3 @@
+---
+- name: base-os
+  include: base-os.yml tags=base-os
