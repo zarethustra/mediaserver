@@ -1,0 +1,84 @@
+---
+- name: install aptitude to bootstrap
+  apt:
+    name: aptitude
+    state: present
+
+- name: ensure os is up to date
+  apt:
+    update_cache: yes
+    upgrade: full
+    cache_valid_time: 300
+
+- name: install packages
+  apt: pkg={{ item }} state=present
+  with_items:
+    - ntp
+    - bash-completion
+    - curl
+    - exiftool
+    - fuse
+    - glances
+    - git
+    - htop
+    - iftop
+    - iotop
+    - jq
+    # - lynx
+    - mc
+    - ncdu
+    # - nmap
+    - openssh-server
+    - python
+    # - reptyr
+    - screen
+    - smartmontools
+    # - sudo
+    - tmux
+    - tree
+    - wget
+    - parted
+    # - xfsprogs
+    # - youtube-dl
+    - cpanminus
+  tags:
+    - packages
+
+- name: create /mnt points
+  file:
+    dest: "/mnt/{{ item }}"
+    state: directory
+    owner: nobody
+    group: nogroup
+    mode: 0777
+  with_items:
+      - disk1
+      - disk2
+      # - disk3
+      # - disk4
+      - parity
+      - storage
+
+# - name: mount disks
+#   mount:
+#     name: "{{ item.name }}"
+#     src: "{{ item.src }}"
+#     fstype: "{{ item.fs }}"
+#     # change to 'mounted' to auto mount
+#     state: present
+#   with_items:
+#     - { name: /mnt/parity, src: /dev/disk/by-uuid/eee0be00-9ae9-49c1-acb0-2dedb2fbac92, fs: ext4}
+#     - { name: /mnt/disk1, src: /dev/disk/by-uuid/790e063c-a0ef-4949-a432-836ca2b33859, fs: ext4}
+#     - { name: /mnt/disk2, src: /dev/disk/by-uuid/f9b4e9e3-78be-4c3a-b840-a19c638ac2d2, fs: ext4}
+    # - { name: /mnt/disk3, src: /dev/disk/by-uuid/002f3a03-8fcd-4a9d-9c36-e9e83f7144aa, fs: ext4}
+    # - { name: /mnt/disk4, src: /dev/disk/by-uuid/ata-Hitachi_HDS5C3030ALA630_MJ1311YNG5SD3A-part1, fs: xfs}
+  # when: ansible_bios_version != "VirtualBox"
+  # when: ansible_product_name != "VMware Virtual Platform"
+- name: mount mergerfs array
+  mount:
+    name: /mnt/storage
+    src: /mnt/disk*
+    opts: direct_io,defaults,allow_other,minfreespace=50G,fsname=mergerfs
+    fstype: fuse.mergerfs
+    # change to 'mounted' to auto mount
+    state: present
