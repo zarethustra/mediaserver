@@ -1,4 +1,4 @@
 [MAIN]
 
-debian-testing ansible_host=192.168.9.124
-debian-9-5 ansible_host=192.168.9.121
+;debian-testing ansible_host=192.168.9.124
+debian-9-5 ansible_host=192.168.9.122
