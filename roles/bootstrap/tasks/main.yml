@@ -1,2 +1,2 @@
 - include: bootstrap.yml
-  tags: bootstrap 
+  tags: bootstrap
