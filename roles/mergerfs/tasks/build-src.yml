@@ -1,0 +1,19 @@
+---
+
+- name: create build directory
+  file: dest=/tmp/mergerfs-build/ state=directory
+
+- name: copy build script
+  copy: src=build-container dest=/tmp/mergerfs-build/ mode=0775
+
+- name: copy Dockerfile
+  copy: src=Dockerfile dest=/tmp/mergerfs-build/
+
+- name: Build MergerFS .deb
+  command: /tmp/mergerfs-build/build-container
+
+- name: Install built .deb file
+  apt: deb=/tmp/mergerfs-build/artifact/mergerfs-from-source.deb
+
+- name: Delete build directory
+  file: dest=/tmp/mergerfs-build/ state=absent
