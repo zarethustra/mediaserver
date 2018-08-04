@@ -1,0 +1,17 @@
+---
+- hosts: debian-9-5
+
+  gather_facts: yes
+  become: yes
+
+  roles:
+    # - bootstrap
+    # - docker
+    # - docker-compose
+    # - mergerfs
+    - base-os
+    # - snapraid
+    # - login-banner
+    # - snapraidrun
+    # - fileshare
+    # - docker-apps-install
