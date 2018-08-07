@@ -1,0 +1,51 @@
+---
+# - name: add docker repository key
+#   apt_key:
+#     url: "https://oitibs.com/repo/keyring.gpg"
+#     state: present
+
+# - name: add docker repository and update apt cache
+#   apt_repository:
+#     repo: "deb https://oitibs.com/repo jessie main"
+#     update_cache: yes
+#     state: present
+- name: Copy files
+  copy:
+    src: files/oitibs_com_repo.list
+    dest: /etc/apt/sources.list.d/
+    
+
+- name: Install packages
+  apt:
+    name: "{{ list_of_packages }}"
+    state: present
+    update_cache: yes
+  # with_items:
+  #   - figlet
+  #   - update-notifier-common
+
+- name: Delete files
+  file:
+    src: files/oitibs_com_repo.list
+    dest: /etc/apt/sources.list.d/oitibs_com_repo.list
+    state: absent
+
+- name: Copy files
+  copy:
+    src: files/update-motd.d
+    dest: /etc
+    # owner: foo
+    # group: foo
+    mode: "u+x,g+x,o+x"
+
+- name: remove motd
+  file:
+    path: /etc/motd
+    state: absent
+
+- name: symlink creation
+  file:
+    path: /etc/motd
+    src: /var/run/motd
+    state: link
+    force: yes
