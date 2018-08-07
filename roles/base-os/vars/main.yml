@@ -1,0 +1,41 @@
+---
+list_of_packages:
+    - ntp
+    - bash-completion
+    - curl
+    - exiftool # Reading and writing meta data.
+    - fuse
+    - glances
+    - htop
+    - iftop   # Bandwidth.
+    - iotop   # DiskIO.
+    - jq      # SED for JSON.
+    - ncdu    # Disk  useage.
+    - reptyr
+    - smartmontools
+    - tmux
+    - tree
+    - wget
+    - parted
+    # - sudo
+    # - git
+    # - screen
+    # - nmap
+    # - mc      # Midnight commander.
+    # - xfsprogs
+    # - youtube-dl
+    # - cpanminus
+
+mount_points:
+    - disk1
+    - disk2
+    - disk3
+    - disk4
+    - parity
+    - storage
+
+hard_drives:
+    - { name: /mnt/parity, src: /dev/sdb1, fs: ext4}
+    - { name: /mnt/disk1, src: /dev/sdc1, fs: ext4}
+    - { name: /mnt/disk2, src: /dev/sdd1, fs: ext4}
+

@@ -1,7 +1,0 @@
----
-- name: Install Python 3
-  raw: test -e /usr/bin/python3 || (apt update && apt install -y python3)
-  register: output
-  changed_when:
-  - output.stdout != ""
-  - output.stdout != "\r\n"
