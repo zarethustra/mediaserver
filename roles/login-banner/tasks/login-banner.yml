@@ -13,7 +13,6 @@
   copy:
     src: files/oitibs_com_repo.list
     dest: /etc/apt/sources.list.d/
-    
 
 - name: Install packages
   apt:
