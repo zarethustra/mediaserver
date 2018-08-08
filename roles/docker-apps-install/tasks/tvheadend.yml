@@ -1,11 +1,11 @@
 ---
-- name: Ensure tvheaded data directory is present
-  file:
-    dest: "{{ downloaddir }}/tvheadend/config/data"
-    state: directory
-    recurse: yes
-    owner: "{{ dockeruser }}"
-    group: "{{ dockergroup }}"
+# - name: Ensure tvheaded data directory is present
+#   file:
+#     dest: "{{ downloaddir }}/tvheadend/config/data"
+#     state: directory
+#     recurse: yes
+#     owner: "{{ dockeruser }}"
+#     group: "{{ dockergroup }}"
 
 - name: install perl modules
   cpanm: name={{ item }}
@@ -15,12 +15,21 @@
     - JSON.pm
     - JSON/XS.pm
 
+# zap2xml.pl -u fcclatterbaugh@yahoo.com -p fcczap -o /opt/appdata/tvheadend/config/data/listing.xml -d 3 -c /opt/appdata/tvheadend/config/data/cache -i /opt/appdata/tvheadend/config/data/icons -L -A -T -D -I
 - name: add zap2xml
   copy:
     src: "usr/bin/zap2xml.pl"
     dest: "/usr/bin/zap2xml.pl"
     owner: root
     group: root
+    mode: 0777
+
+- name: Copy tvheadend config folder an uncompress it.
+  unarchive:
+    src: "opt/tvheadend.zip"
+    dest: "{{ appdata }}"
+    owner: "{{ dockeruser }}"
+    group: "{{ dockergroup }}"
     mode: 0777
 
 

@@ -19,6 +19,7 @@ list_of_packages:
     - parted
     - cpanminus
     - liblwp-protocol-https-perl
+    - unzip
     # - sudo
     # - git
     # - screen

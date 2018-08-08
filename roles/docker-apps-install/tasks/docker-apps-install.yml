@@ -36,8 +36,6 @@
     owner: "{{ dockeruser }}"
     group: "{{ dockergroup }}"
 
-- include: tvheadend.yml
-
 - name: add dtail
   copy:
     src: "usr/bin/dtail"

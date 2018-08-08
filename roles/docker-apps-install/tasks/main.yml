@@ -2,3 +2,7 @@
 - name: Install docker apps.
   include: docker-apps-install.yml
   tags: docker-apps-install
+
+- name: Install tvheadend.
+  include: tvheadend.yml
+  tags: tvheadend
