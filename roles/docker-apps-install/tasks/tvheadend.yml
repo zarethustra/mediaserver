@@ -1,0 +1,39 @@
+---
+- name: Ensure tvheaded data directory is present
+  file:
+    dest: "{{ downloaddir }}/tvheadend/config/data"
+    state: directory
+    recurse: yes
+    owner: "{{ dockeruser }}"
+    group: "{{ dockergroup }}"
+
+- name: install perl modules
+  cpanm: name={{ item }}
+  with_items:
+    - HTTP/Cookies.pm
+    - LWP/UserAgent.pm
+    - JSON.pm
+    - JSON/XS.pm
+
+- name: add zap2xml
+  copy:
+    src: "usr/bin/zap2xml.pl"
+    dest: "/usr/bin/zap2xml.pl"
+    owner: root
+    group: root
+    mode: 0777
+
+
+# - name: install perl https requirements
+#   apt:
+#     name: "liblwp-protocol-https-perl"
+#     state: present
+#     update_cache: yes
+
+# - name: set up cron job
+#   cron:
+#     name: "Update TVschedule"
+#     state: present
+#     minute: "0"
+#     hour: "6,18"
+#     job: "zap2xml.pl -u fcclatterbaugh@yahoo.com -p fcczap -o /opt/appdata/tvheadend/config/data/listing.xml -d 3 -c /opt/appdata/tvheadend/config/data/cache -i /opt/appdata/tvheadend/config/data/icons -L -A -T -D -I"

@@ -5,13 +5,12 @@
   become: yes
 
   roles:
-    # - bootstrap
-    # - docker
-    # - docker-compose
-    # - mergerfs
+    - docker
+    - docker-compose
+    - mergerfs
     - base-os
-    # - snapraid
-    # - login-banner
+    - snapraid
+    - login-banner
+    - docker-apps-install
     # - snapraidrun
     # - fileshare
-    # - docker-apps-install

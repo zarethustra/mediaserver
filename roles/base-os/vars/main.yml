@@ -17,6 +17,8 @@ list_of_packages:
     - tree
     - wget
     - parted
+    - cpanminus
+    - liblwp-protocol-https-perl
     # - sudo
     # - git
     # - screen
@@ -24,7 +26,6 @@ list_of_packages:
     # - mc      # Midnight commander.
     # - xfsprogs
     # - youtube-dl
-    # - cpanminus
 
 mount_points:
     - disk1

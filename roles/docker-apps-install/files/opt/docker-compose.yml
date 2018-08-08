@@ -1,0 +1,59 @@
+---
+version: '2'
+services:
+#   radarr:
+#     image: linuxserver/radarr
+#     container_name: radarr
+#     # depends_on:
+#     #   - plex
+#     volumes:
+#       - /opt/appdata/radarr:/config
+#       - /opt/appdata/plex/Library/Application\ Support/Plex\ Media\ Server/Logs:/logs:ro
+#     ports:
+#       - 27029:7878
+#     # links:
+#     #   - plex
+#     restart: always
+#     environment:
+#       - PUID=1050
+#       - PGID=1050
+
+# nzbget:
+#     image: linuxserver/nzbget
+#     container_name: nzbget
+#     volumes:
+#       - /opt/appdata/nzbget/config:/config
+#       - /opt/downloads:/downloads
+#       - /mnt/disk1/downloads/complete:/downloads/complete
+#     ports:
+#       - 27020:6789
+#     restart: always
+#     environment:
+#       - PUID=1050
+#       - PGID=1050
+
+  tvheadend:
+    image: linuxserver/tvheadend
+    container_name: tvheadend
+    network_mode : host
+    volumes:
+      - /opt/appdata/tvheadend/config:/config
+      - /mnt/storage/TV:/recordings
+    restart: always
+    environment:
+      - PUID=1050
+      - PGID=1050
+      - TZ=America/Chicago
+
+  # emby:
+  #   image: emby/embyserver
+  #   container_name: emby
+  #   network_mode : host
+  #   volumes:
+  #     - /opt/appdata/emby/config:/config
+  #     - /mnt/storage:/config/.embyserver.volumes
+  #   restart: always
+  #   environment:
+  #     - PUID=1050
+  #     - PGID=1050
+  #     - TZ=America/Chicago
